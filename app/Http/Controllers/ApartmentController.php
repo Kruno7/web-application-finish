@@ -75,7 +75,8 @@ class ApartmentController extends Controller
 
     public function getAparmentsByCityId($id) 
     {
-        return view('user.apartments.index')->with('apartments', Apartment::all());
+        $apartments = Apartment::where('city_id', $id)->get();
+        return view('user.apartments.index')->with('apartments', $apartments);
     }
 
     public function sendMessage ($id)
