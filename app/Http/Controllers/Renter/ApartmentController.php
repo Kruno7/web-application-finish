@@ -142,18 +142,12 @@ class ApartmentController extends Controller
         $image = Image::find($id);
         $image->delete();
         return redirect()->back()->with('success', 'your message,here');  
-
     }
 
-    public function message()
+    public function message ()
     {
-        $messages = Message::all();
-        $replies  = Reply::all();
-        
-        return view('renter.apartments.message')->with([
-            'messages' => $messages,
-            'replies' => $replies,
-        ]);
+        $apartments = Apartment::where('user_id', Auth::user()->id)->get();
+        return view('renter.apartments.message')->with('apartments', $apartments);
     }
 
     public function reply (Request $request)
